@@ -1,84 +1,32 @@
-# Spotify Discord Hosts Fixer
+export interface IpRecord {
+  ip: string;
+  status: "Up" | "Down";
+  provider: string;
+  latency?: number;
+}
 
-> **Неофициальный** инструмент с открытым кодом. Не связан со Spotify, Discord или GeoHide.
-> Используйте на свой страх и риск.
+export interface ToastMessage {
+  id: string;
+  message: string;
+  type: "success" | "error" | "info" | "warning";
+}
 
-Десктоп-программа (Windows / macOS / Linux), которая помогает восстановить отображение
-«сейчас слушает Spotify» в Discord в условиях, когда домены Spotify недоступны или
-замедлены на вашем интернет-канале. Программа добавляет в системный файл `hosts`
-блок записей, перенаправляющий домены Spotify на прокси-узлы **GeoHide**.
+export interface ApplyResult {
+  success: boolean;
+  message: string;
+}
 
-## Что именно делает программа
+// API, прокинутое из preload через contextBridge
+export interface FixerApi {
+  getIps: () => Promise<IpRecord[]>;
+  getStatus: () => Promise<boolean | null>;
+  getBlockText: (ips: string[]) => Promise<string>;
+  apply: (ips: string[]) => Promise<ApplyResult>;
+  remove: () => Promise<ApplyResult>;
+}
 
-- Получает IP прокси-узлов через DNS-резолв `geohide.ru` и проверяет их доступность по TCP `:443`.
-- По нажатию **«Обновить и применить»** запрашивает права администратора (UAC), делает
-  резервную копию `hosts` (`hosts.backup.<дата_время>`) и записывает блок между маркерами
-  `#spotify-discord-hosts` … `#end-spotify-discord-hosts`.
-- По нажатию **«Сбросить hosts»** удаляет этот блок и восстанавливает стандартную маршрутизацию.
-- Сбрасывает кэш DNS после изменения.
-
-## ⚠️ Важно про безопасность
-
-Программа перенаправляет домены Spotify — **включая домены авторизации**
-(`accounts.spotify.com`, `login5.spotify.com`) — на серверы GeoHide. Это значит, что
-весь соответствующий трафик будет идти через сторонний сервис, которому вы должны
-доверять. Программа **не** устанавливает корневые сертификаты и **не** перехватывает
-зашифрованный трафик сама по себе, но конечная безопасность зависит от того, что
-делают серверы GeoHide. Решение об использовании — за вами.
-
-Изменения вносятся только после явного запроса прав администратора, всегда создаётся
-резервная копия, и блок полностью обратим.
-
-## Установка (готовый .exe)
-
-Скачайте установщик или portable-версию со страницы [Releases](../../releases) и запустите.
-
-## Сборка из исходников
-
-Требуется Node.js 20+.
-
-```bash
-npm install
-npm run dist      # соберёт установщик и portable .exe в папку release/
-```
-
-Для разработки:
-
-```bash
-npm install
-npm run dev:renderer   # дев-сервер интерфейса (Vite)
-```
-
-## Полезные ссылки
-
-- **GeoHide DNS** — https://dns.geohide.ru:8443/
-- **SpotX** — https://github.com/SpotX-Official/SpotX
-- **Исходный код** — https://github.com/swd3k/spotify-discord-hosts
-
-## Обрабатываемые домены
-
-```
-gew1-spclient.spotify.com
-login5.spotify.com
-spotify.com
-api.spotify.com
-appresolve.spotify.com
-accounts.spotify.com
-aet.spotify.com
-open.spotify.com
-spotifycdn.com
-```
-
-## Отказ от ответственности
-
-Инструмент предназначен для восстановления штатной работы легально
-используемых сервисов. Изменение системного `hosts` — на ваш страх и риск;
-перед каждым изменением создаётся резервная копия, доступен откат.
-
-## Технологии
-
-Electron · React · Vite · Tailwind CSS · electron-builder
-
-## Лицензия
-
-[MIT](./LICENSE) © 2026 swd3k
+declare global {
+  interface Window {
+    api: FixerApi;
+  }
+}

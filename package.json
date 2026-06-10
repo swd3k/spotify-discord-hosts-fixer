@@ -1,52 +1,64 @@
-{
-  "name": "spotify-discord-hosts-fixer",
-  "private": true,
-  "version": "1.2.0",
-  "description": "Неофициальная программа для управления записями hosts (домены Spotify -> прокси GeoHide), чтобы восстановить синхронизацию презенса Spotify в Discord.",
-  "author": "",
-  "license": "MIT",
-  "main": "dist/electron/main.js",
-  "scripts": {
-    "dev:renderer": "vite",
-    "build:renderer": "vite build",
-    "build:electron": "esbuild electron/main.ts electron/preload.ts --bundle --platform=node --target=node18 --format=cjs --external:electron --external:sudo-prompt --outdir=dist/electron",
-    "build": "npm run build:renderer && npm run build:electron",
-    "dist": "npm run build && electron-builder --win --publish never",
-    "lint": "tsc --noEmit"
-  },
-  "dependencies": {
-    "lucide-react": "^0.546.0",
-    "motion": "^12.23.24",
-    "react": "^19.0.1",
-    "react-dom": "^19.0.1",
-    "sudo-prompt": "^9.2.1"
-  },
-  "devDependencies": {
-    "@tailwindcss/vite": "^4.1.14",
-    "@types/node": "^22.14.0",
-    "@types/react": "^19.0.0",
-    "@types/react-dom": "^19.0.0",
-    "@vitejs/plugin-react": "^5.0.4",
-    "electron": "^33.0.0",
-    "electron-builder": "^25.1.8",
-    "esbuild": "^0.25.0",
-    "tailwindcss": "^4.1.14",
-    "typescript": "~5.8.2",
-    "vite": "^6.2.3"
-  },
-  "build": {
-    "appId": "com.geohide.spotify-discord-hosts-fixer",
-    "productName": "Spotify Discord Hosts Fixer",
-    "files": ["dist/**/*", "package.json"],
-    "directories": { "output": "release", "buildResources": "build" },
-    "win": {
-      "target": ["nsis", "portable"],
-      "requestedExecutionLevel": "asInvoker"
-    },
-    "nsis": {
-      "oneClick": false,
-      "perMachine": false,
-      "allowToChangeInstallationDirectory": true
-    }
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap');
+@import "tailwindcss";
+
+/* Tailwind v4: привязываем вариант dark: к классу .dark на <html>,
+   иначе переключатель темы не работает и сайт следует только за настройкой ОС. */
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --color-spotify: #1DB954;
+  --color-primary-green: #1ED760;
+  --color-dark-surface: #1c1b1f;
+  --color-dark-container: #333333;
+  /* Промежуточные оттенки, которые использует разметка. В Tailwind v4 таких
+     классов по умолчанию нет (neutral идёт шагами 100/200/300...), поэтому
+     раньше bg-neutral-850, border-neutral-150 и т.п. молча игнорировались —
+     отсюда «съеденные» рамки, фоны и невидимая иконка темы при наведении. */
+  --color-neutral-150: #ededed;
+  --color-neutral-250: #dadada;
+  --color-neutral-450: #8a8a8a;
+  --color-neutral-750: #333333;
+  --color-neutral-850: #1f1f1f;
+  --color-rose-450: #f65a72;
+  --font-sans: "Inter", "SF Pro Text", -apple-system, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+}
+
+@layer base {
+  /* Прозрачный корень, чтобы под окном был виден системный acrylic-фон. */
+  html, body, #root {
+    background-color: transparent;
+  }
+  body {
+    @apply antialiased font-sans transition-colors duration-350;
   }
 }
+
+@utility immersive-bg-dark {
+  background: radial-gradient(circle at 5% 5%, rgba(29, 185, 84, 0.15) 0%, transparent 45%), 
+              radial-gradient(circle at 95% 95%, rgba(88, 101, 242, 0.15) 0%, transparent 45%), 
+              #0c0c0c;
+}
+
+@utility immersive-bg-light {
+  background: radial-gradient(circle at 5% 5%, rgba(29, 185, 84, 0.08) 0%, transparent 50%), 
+              radial-gradient(circle at 95% 95%, rgba(88, 101, 242, 0.08) 0%, transparent 50%), 
+              #f5f5f7;
+}
+
+/* Custom scrollbar to keep it sleek and integrated */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 60px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(120, 120, 120, 0.2);
+  border-radius: 99px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(120, 120, 120, 0.4);
+}
+
