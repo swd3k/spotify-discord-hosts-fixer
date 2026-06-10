@@ -1,4 +1,4 @@
-./techint.png 
+./images/techint.png
 
 ## Spotify Discord Hosts Fixer
 
