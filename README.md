@@ -1,5 +1,3 @@
-[![Uploading techint.png…]()](https://github.com/swd3k/spotify-discord-hosts-fixer/blob/main/docs/techint.png)
-
 ## Spotify Discord Hosts Fixer
 
 > **Неофициальный** инструмент с открытым кодом. Не связан со Spotify, Discord или GeoHide.
