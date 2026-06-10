@@ -1,3 +1,5 @@
+./techint.png 
+
 ## Spotify Discord Hosts Fixer
 
 > **Неофициальный** инструмент с открытым кодом. Не связан со Spotify, Discord или GeoHide.
