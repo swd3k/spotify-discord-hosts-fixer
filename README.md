@@ -61,10 +61,36 @@ git push origin v1.2.0
 
 GitHub Actions соберёт `.exe` на Windows-раннере и приложит его к релизу.
 
+## Полезные ссылки
+
+- **GeoHide DNS** — https://dns.geohide.ru:8443/
+- **SpotX** — https://github.com/SpotX-Official/SpotX
+- **Исходный код** — https://github.com/swd3k/spotify-discord-hosts
+
+## Обрабатываемые домены
+
+```
+gew1-spclient.spotify.com
+login5.spotify.com
+spotify.com
+api.spotify.com
+appresolve.spotify.com
+accounts.spotify.com
+aet.spotify.com
+open.spotify.com
+spotifycdn.com
+```
+
+## Отказ от ответственности
+
+Инструмент предназначен для восстановления штатной работы легально
+используемых сервисов. Изменение системного `hosts` — на ваш страх и риск;
+перед каждым изменением создаётся резервная копия, доступен откат.
+
 ## Технологии
 
 Electron · React · Vite · Tailwind CSS · electron-builder
 
 ## Лицензия
 
-[MIT](./LICENSE)
+[MIT](./LICENSE) © 2026 swd3k
