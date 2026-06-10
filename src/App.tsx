@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Trash2, RefreshCw, Sun, Moon, Info, Play, CheckCircle, XCircle, Github, ExternalLink } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 import { IPList } from "./components/IPList";
+import logoUrl from "./assets/logo.png";
 import { HostsBlockPreview } from "./components/HostsBlockPreview";
 import { TerminalLogs } from "./components/TerminalLogs";
 import { IpRecord, ToastMessage } from "./types";
@@ -132,11 +133,8 @@ export default function App() {
       <main className="w-full max-w-lg bg-white dark:bg-[#1c1b1f] rounded-[28px] border border-neutral-200 dark:border-white/10 shadow-2xl overflow-hidden relative z-10 duration-250">
         <div className="px-6 py-4 border-b border-neutral-150 dark:border-white/5 flex items-center justify-between bg-neutral-50/50 dark:bg-neutral-900/40">
           <div className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-lg bg-[#1DB954] flex items-center justify-center shadow-md shadow-[#1DB954]/20 text-[#003912] font-bold">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.49 17.306c-.215.353-.675.465-1.028.25-2.858-1.747-6.455-2.142-10.693-1.173-.404.092-.813-.16-.906-.565-.092-.403.16-.813.565-.905 4.63-1.058 8.604-.6 11.808 1.358.353.215.465.675.25 1.028zm1.467-3.264c-.27.44-.846.58-1.287.31-3.27-2.01-8.254-2.592-12.12-1.417-.497.15-1.022-.13-1.173-.627-.15-.497.13-1.022.626-1.173 4.414-1.34 9.904-.68 13.642 1.614.44.27.58.847.31 1.288zm.126-3.41c-3.92-2.328-10.375-2.544-14.133-1.403-.6.182-1.24-.162-1.422-.763-.182-.6.162-1.24.763-1.422 4.312-1.308 11.434-1.055 15.962 1.63.54.32.716 1.014.396 1.554-.32.54-1.013.717-1.554.397z" />
-              </svg>
-            </div>
+            <img src={logoUrl} alt="Spotify Discord Fixer" className="w-9 h-9 rounded-lg shadow-md shadow-[#1DB954]/20" />
+
             <div>
               <h1 className="text-sm font-bold tracking-tight text-neutral-800 dark:text-[#e6e1e5]">Spotify Discord Fixer</h1>
               <p className="text-[10px] font-mono text-neutral-450 dark:text-[#938f99] font-medium">v{__APP_VERSION__} • GeoHide Linker</p>

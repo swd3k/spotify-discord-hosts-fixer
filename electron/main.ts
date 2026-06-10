@@ -15,6 +15,8 @@ function createWindow() {
   const win = new BrowserWindow({
     width: 560,
     height: 880,
+    minWidth: 540,
+    minHeight: 700,
     resizable: true,
     show: false,
     icon: assetPath("icon.png"),
