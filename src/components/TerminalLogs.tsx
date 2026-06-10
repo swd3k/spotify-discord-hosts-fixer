@@ -40,15 +40,15 @@ export const TerminalLogs: React.FC<TerminalLogsProps> = ({ logs, onClear }) => 
         ) : (
           logs.map((log, i) => {
             let colorClass = "text-[#e6e1e5]/90";
-            if (log.includes("[ERROR]") || log.includes("fail") || log.includes("Error")) {
+            if (log.startsWith("❌") || log.includes("[ERROR]") || log.includes("[API ERROR]")) {
               colorClass = "text-rose-400 font-bold";
-            } else if (log.includes("[WARNING]")) {
+            } else if (log.startsWith("⚠️") || log.includes("[WARNING]")) {
               colorClass = "text-amber-400";
-            } else if (log.includes("[SUCCESS]")) {
+            } else if (log.startsWith("✅") || log.includes("[SUCCESS]")) {
               colorClass = "text-[#1DB954] font-bold drop-shadow-[0_0_2px_rgba(29,185,84,0.25)]";
             } else if (log.includes("[SYSTEM]")) {
               colorClass = "text-sky-400";
-            } else if (log.includes("[UTILITY]")) {
+            } else if (log.includes("[UTILITY]") || log.includes("[SHELL]")) {
               colorClass = "text-fuchsia-400";
             }
 

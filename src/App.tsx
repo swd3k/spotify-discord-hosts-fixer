@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Trash2, RefreshCw, Sun, Moon, Info, Play, CheckCircle, XCircle, Github, ExternalLink } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 import { IPList } from "./components/IPList";
-import logoUrl from "./assets/logo.png";
+import logoUrl from "./assets/logo.png?inline";
 import { HostsBlockPreview } from "./components/HostsBlockPreview";
 import { TerminalLogs } from "./components/TerminalLogs";
 import { IpRecord, ToastMessage } from "./types";
