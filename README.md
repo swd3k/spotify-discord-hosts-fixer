@@ -29,7 +29,7 @@
 
 ## Установка (готовый .exe)
 
-Скачайте установщик или portable-версию со страницы Releases и запустите.
+Скачайте установщик или portable-версию со страницы `Releases` (`https://github.com/swd3k/spotify-discord-hosts-fixer/releases`) и запустите.
 
 ## Сборка из исходников
 
