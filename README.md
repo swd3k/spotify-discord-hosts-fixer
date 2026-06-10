@@ -49,18 +49,6 @@ npm install
 npm run dev:renderer   # дев-сервер интерфейса (Vite)
 ```
 
-## Автоматическая сборка (CI)
-
-В репозитории настроен workflow `.github/workflows/build.yml`. Чтобы выпустить релиз
-со собранным `.exe`:
-
-```bash
-git tag v1.2.0
-git push origin v1.2.0
-```
-
-GitHub Actions соберёт `.exe` на Windows-раннере и приложит его к релизу.
-
 ## Полезные ссылки
 
 - **GeoHide DNS** — https://dns.geohide.ru:8443/
