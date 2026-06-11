@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import { createPortal } from "react-dom";
 import { Trash2, RefreshCw, Sun, Moon, Info, Play, CheckCircle, XCircle, Github, ExternalLink, Settings2, ShieldCheck, Power, AlertTriangle } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 import { IPList } from "./components/IPList";
@@ -372,6 +373,9 @@ export default function App() {
         </div>
       </main>
 
+      {/* Портал в body: у корневого контейнера есть backdrop-filter, из-за которого
+          position:fixed считался бы от всей прокручиваемой страницы, а не от окна. */}
+      {createPortal(
       <AnimatePresence>
         {consentOpen && (
           <motion.div
@@ -420,8 +424,11 @@ export default function App() {
             </motion.div>
           </motion.div>
         )}
-      </AnimatePresence>
+      </AnimatePresence>,
+      document.body)}
 
+      {/* Тосты — тоже через портал, иначе «прилипают» к низу прокручиваемой страницы. */}
+      {createPortal(
       <div className="fixed bottom-4 right-4 space-y-2 z-50 pointer-events-none max-w-sm w-full">
         <AnimatePresence>
           {toasts.map((toast) => (
@@ -451,7 +458,8 @@ export default function App() {
             </motion.div>
           ))}
         </AnimatePresence>
-      </div>
+      </div>,
+      document.body)}
     </div>
   );
 }
