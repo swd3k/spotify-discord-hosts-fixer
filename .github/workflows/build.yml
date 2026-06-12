@@ -43,6 +43,15 @@ jobs:
       - name: Build
         run: npm run build
 
+      # Ловит «тихие» поломки сборки: например, без vite.config.ts vite собирает
+      # в dist/ вместо dist/renderer/, и приложение открывается пустым окном.
+      - name: Verify build output
+        shell: pwsh
+        run: |
+          if (-not (Test-Path dist/renderer/index.html)) { throw "dist/renderer/index.html отсутствует — проверьте vite.config.ts" }
+          if (-not (Test-Path dist/electron/main.js)) { throw "dist/electron/main.js отсутствует" }
+          if (-not (Test-Path dist/electron/preload.js)) { throw "dist/electron/preload.js отсутствует" }
+
   release:
     if: ${{ startsWith(github.ref, 'refs/tags/') }}
     runs-on: windows-latest
